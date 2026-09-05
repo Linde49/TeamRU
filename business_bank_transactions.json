@@ -1,186 +1,484 @@
 {
-  "business": "Ubuntu Design Studio",
+  "business": "Karabo's Spaza",
+  "owner": "Karabo Mokoena",
   "currency": "ZAR",
+  "industry": "Retail / Spaza shop",
+  "yearsTrading": 3,
+  "employees": 2,
+  "typicalMonthlyRevenue": 48650,
+  "notes": "Neighbourhood convenience store with consistent daily sales.",
   "transactions": [
     {
-      "transactionId": "TXN001",
-      "date": "2026-08-01",
+      "date": "2026-04-01",
       "description": "Yoco Card Settlement",
       "type": "Deposit",
       "provider": "Yoco",
-      "amount": 4250.0,
-      "balance": 24250.0
+      "amount": 6200.00,
+      "balance": 6200.00
     },
     {
-      "transactionId": "TXN002",
-      "date": "2026-08-02",
+      "date": "2026-04-03",
       "description": "Office Rent",
       "type": "Expenditure",
       "provider": "ABSA",
-      "amount": -6500.0,
-      "balance": 17750.0
+      "amount": -5000.00,
+      "balance": 1200.00
     },
     {
-      "transactionId": "TXN003",
-      "date": "2026-08-03",
+      "date": "2026-04-08",
       "description": "Yoco Card Settlement",
       "type": "Deposit",
       "provider": "Yoco",
-      "amount": 3780.0,
-      "balance": 21530.0
+      "amount": 5800.00,
+      "balance": 7000.00
     },
     {
-      "transactionId": "TXN004",
-      "date": "2026-08-04",
-      "description": "Internet & Fibre",
+      "date": "2026-04-15",
+      "description": "Stock Purchase",
       "type": "Expenditure",
       "provider": "ABSA",
-      "amount": -899.0,
-      "balance": 20631.0
+      "amount": -3200.00,
+      "balance": 3800.00
     },
     {
-      "transactionId": "TXN005",
-      "date": "2026-08-05",
+      "date": "2026-04-22",
       "description": "Yoco Card Settlement",
       "type": "Deposit",
       "provider": "Yoco",
-      "amount": 5120.0,
-      "balance": 25751.0
+      "amount": 5000.00,
+      "balance": 8800.00
     },
     {
-      "transactionId": "TXN006",
-      "date": "2026-08-06",
-      "description": "Office Supplies",
-      "type": "Expenditure",
-      "provider": "ABSA",
-      "amount": -1245.5,
-      "balance": 24505.5
-    },
-    {
-      "transactionId": "TXN007",
-      "date": "2026-08-08",
+      "date": "2026-05-02",
       "description": "Yoco Card Settlement",
       "type": "Deposit",
       "provider": "Yoco",
-      "amount": 2950.0,
-      "balance": 27455.5
+      "amount": 6800.00,
+      "balance": 15600.00
     },
     {
-      "transactionId": "TXN008",
-      "date": "2026-08-09",
+      "date": "2026-05-05",
       "description": "Electricity",
       "type": "Expenditure",
       "provider": "ABSA",
-      "amount": -1180.75,
-      "balance": 26274.75
+      "amount": -1200.00,
+      "balance": 14400.00
     },
     {
-      "transactionId": "TXN009",
+      "date": "2026-05-10",
+      "description": "Yoco Card Settlement",
+      "type": "Deposit",
+      "provider": "Yoco",
+      "amount": 6200.00,
+      "balance": 20600.00
+    },
+    {
+      "date": "2026-05-18",
+      "description": "Staff Salaries",
+      "type": "Expenditure",
+      "provider": "ABSA",
+      "amount": -4500.00,
+      "balance": 16100.00
+    },
+    {
+      "date": "2026-05-25",
+      "description": "Yoco Card Settlement",
+      "type": "Deposit",
+      "provider": "Yoco",
+      "amount": 5400.00,
+      "balance": 21500.00
+    },
+    {
+      "date": "2026-06-01",
+      "description": "Yoco Card Settlement",
+      "type": "Deposit",
+      "provider": "Yoco",
+      "amount": 7100.00,
+      "balance": 28600.00
+    },
+    {
+      "date": "2026-06-07",
+      "description": "Transport & Fuel",
+      "type": "Expenditure",
+      "provider": "ABSA",
+      "amount": -1800.00,
+      "balance": 26800.00
+    },
+    {
+      "date": "2026-06-12",
+      "description": "Yoco Card Settlement",
+      "type": "Deposit",
+      "provider": "Yoco",
+      "amount": 6900.00,
+      "balance": 33700.00
+    },
+    {
+      "date": "2026-06-20",
+      "description": "Office Supplies",
+      "type": "Expenditure",
+      "provider": "ABSA",
+      "amount": -2200.00,
+      "balance": 31500.00
+    },
+    {
+      "date": "2026-06-28",
+      "description": "Yoco Card Settlement",
+      "type": "Deposit",
+      "provider": "Yoco",
+      "amount": 5800.00,
+      "balance": 37300.00
+    },
+    {
+      "date": "2026-07-02",
+      "description": "Yoco Card Settlement",
+      "type": "Deposit",
+      "provider": "Yoco",
+      "amount": 7800.00,
+      "balance": 45100.00
+    },
+    {
+      "date": "2026-07-08",
+      "description": "Internet & Fibre",
+      "type": "Expenditure",
+      "provider": "ABSA",
+      "amount": -899.00,
+      "balance": 44201.00
+    },
+    {
+      "date": "2026-07-14",
+      "description": "Yoco Card Settlement",
+      "type": "Deposit",
+      "provider": "Yoco",
+      "amount": 7200.00,
+      "balance": 51401.00
+    },
+    {
+      "date": "2026-07-21",
+      "description": "Equipment Purchase",
+      "type": "Expenditure",
+      "provider": "ABSA",
+      "amount": -3200.00,
+      "balance": 48201.00
+    },
+    {
+      "date": "2026-07-28",
+      "description": "Yoco Card Settlement",
+      "type": "Deposit",
+      "provider": "Yoco",
+      "amount": 6800.00,
+      "balance": 55001.00
+    },
+    {
+      "date": "2026-08-02",
+      "description": "Yoco Card Settlement",
+      "type": "Deposit",
+      "provider": "Yoco",
+      "amount": 8400.00,
+      "balance": 63401.00
+    },
+    {
+      "date": "2026-08-06",
+      "description": "Rent",
+      "type": "Expenditure",
+      "provider": "ABSA",
+      "amount": -5500.00,
+      "balance": 57901.00
+    },
+    {
       "date": "2026-08-10",
       "description": "Yoco Card Settlement",
       "type": "Deposit",
       "provider": "Yoco",
-      "amount": 4890.0,
-      "balance": 31164.75
+      "amount": 7900.00,
+      "balance": 65801.00
     },
     {
-      "transactionId": "TXN010",
-      "date": "2026-08-12",
-      "description": "Staff Salaries",
-      "type": "Expenditure",
-      "provider": "ABSA",
-      "amount": -8500.0,
-      "balance": 22664.75
-    },
-    {
-      "transactionId": "TXN011",
-      "date": "2026-08-13",
-      "description": "Yoco Card Settlement",
-      "type": "Deposit",
-      "provider": "Yoco",
-      "amount": 3420.0,
-      "balance": 26084.75
-    },
-    {
-      "transactionId": "TXN012",
-      "date": "2026-08-15",
-      "description": "Advertising",
-      "type": "Expenditure",
-      "provider": "ABSA",
-      "amount": -1750.0,
-      "balance": 24334.75
-    },
-    {
-      "transactionId": "TXN013",
       "date": "2026-08-16",
-      "description": "Yoco Card Settlement",
-      "type": "Deposit",
-      "provider": "Yoco",
-      "amount": 6250.0,
-      "balance": 30584.75
-    },
-    {
-      "transactionId": "TXN014",
-      "date": "2026-08-18",
-      "description": "Equipment Purchase",
+      "description": "Stock",
       "type": "Expenditure",
       "provider": "ABSA",
-      "amount": -4200.0,
-      "balance": 26384.75
+      "amount": -3800.00,
+      "balance": 62001.00
     },
     {
-      "transactionId": "TXN015",
-      "date": "2026-08-19",
-      "description": "Yoco Card Settlement",
-      "type": "Deposit",
-      "provider": "Yoco",
-      "amount": 3890.0,
-      "balance": 30274.75
-    },
-    {
-      "transactionId": "TXN016",
-      "date": "2026-08-21",
-      "description": "Business Insurance",
-      "type": "Expenditure",
-      "provider": "ABSA",
-      "amount": -950.0,
-      "balance": 29324.75
-    },
-    {
-      "transactionId": "TXN017",
       "date": "2026-08-22",
       "description": "Yoco Card Settlement",
       "type": "Deposit",
       "provider": "Yoco",
-      "amount": 5430.0,
-      "balance": 34754.75
+      "amount": 7600.00,
+      "balance": 69601.00
     },
     {
-      "transactionId": "TXN018",
-      "date": "2026-08-24",
-      "description": "Fuel & Transport",
+      "date": "2026-08-28",
+      "description": "Utilities",
       "type": "Expenditure",
       "provider": "ABSA",
-      "amount": -1320.0,
-      "balance": 33434.75
+      "amount": -1200.00,
+      "balance": 68401.00
     },
     {
-      "transactionId": "TXN019",
-      "date": "2026-08-26",
+      "date": "2026-08-30",
+      "description": "Transport to supplier",
+      "type": "Expenditure",
+      "provider": "ABSA",
+      "amount": -420.00,
+      "balance": 67981.00
+    },
+    {
+      "date": "2026-09-01",
+      "description": "Daily shop sales",
+      "type": "Deposit",
+      "provider": "Yoco",
+      "amount": 4430.00,
+      "balance": 72411.00
+    },
+    {
+      "date": "2026-09-01",
+      "description": "Rent",
+      "type": "Expenditure",
+      "provider": "ABSA",
+      "amount": -5500.00,
+      "balance": 66911.00
+    },
+    {
+      "date": "2026-09-02",
+      "description": "Electricity",
+      "type": "Expenditure",
+      "provider": "ABSA",
+      "amount": -680.00,
+      "balance": 66231.00
+    },
+    {
+      "date": "2026-09-02",
       "description": "Yoco Card Settlement",
       "type": "Deposit",
       "provider": "Yoco",
-      "amount": 4670.0,
-      "balance": 38104.75
+      "amount": 4320.00,
+      "balance": 70551.00
     },
     {
-      "transactionId": "TXN020",
-      "date": "2026-08-28",
+      "date": "2026-09-03",
+      "description": "Daily shop sales",
+      "type": "Deposit",
+      "provider": "Yoco",
+      "amount": 4875.00,
+      "balance": 75426.00
+    },
+    {
+      "date": "2026-09-03",
+      "description": "Stock purchase",
+      "type": "Expenditure",
+      "provider": "ABSA",
+      "amount": -2150.00,
+      "balance": 73276.00
+    },
+    {
+      "date": "2026-09-04",
+      "description": "Stock from wholesaler",
+      "type": "Expenditure",
+      "provider": "ABSA",
+      "amount": -2170.00,
+      "balance": 71106.00
+    },
+    {
+      "date": "2026-09-04",
+      "description": "Yoco Card Settlement",
+      "type": "Deposit",
+      "provider": "Yoco",
+      "amount": 5100.00,
+      "balance": 76206.00
+    },
+    {
+      "date": "2026-09-05",
+      "description": "Daily shop sales",
+      "type": "Deposit",
+      "provider": "Yoco",
+      "amount": 5260.00,
+      "balance": 81466.00
+    },
+    {
+      "date": "2026-09-05",
+      "description": "Staff salaries",
+      "type": "Expenditure",
+      "provider": "ABSA",
+      "amount": -8500.00,
+      "balance": 72966.00
+    },
+    {
+      "date": "2026-09-06",
+      "description": "Yoco Card Settlement",
+      "type": "Deposit",
+      "provider": "Yoco",
+      "amount": 4900.00,
+      "balance": 77866.00
+    },
+    {
+      "date": "2026-09-06",
+      "description": "Advertising",
+      "type": "Expenditure",
+      "provider": "ABSA",
+      "amount": -1500.00,
+      "balance": 76366.00
+    },
+    {
+      "date": "2026-09-07",
+      "description": "Yoco Card Settlement",
+      "type": "Deposit",
+      "provider": "Yoco",
+      "amount": 6100.00,
+      "balance": 82466.00
+    },
+    {
+      "date": "2026-09-07",
+      "description": "Insurance",
+      "type": "Expenditure",
+      "provider": "ABSA",
+      "amount": -950.00,
+      "balance": 81516.00
+    },
+    {
+      "date": "2026-09-08",
+      "description": "Yoco Card Settlement",
+      "type": "Deposit",
+      "provider": "Yoco",
+      "amount": 5600.00,
+      "balance": 87116.00
+    },
+    {
+      "date": "2026-09-08",
+      "description": "Internet & Fibre",
+      "type": "Expenditure",
+      "provider": "ABSA",
+      "amount": -899.00,
+      "balance": 86217.00
+    },
+    {
+      "date": "2026-09-09",
+      "description": "Yoco Card Settlement",
+      "type": "Deposit",
+      "provider": "Yoco",
+      "amount": 5200.00,
+      "balance": 91417.00
+    },
+    {
+      "date": "2026-09-09",
+      "description": "Fuel & Transport",
+      "type": "Expenditure",
+      "provider": "ABSA",
+      "amount": -1320.00,
+      "balance": 90097.00
+    },
+    {
+      "date": "2026-09-10",
+      "description": "Yoco Card Settlement",
+      "type": "Deposit",
+      "provider": "Yoco",
+      "amount": 4865.00,
+      "balance": 94962.00
+    },
+    {
+      "date": "2026-09-10",
       "description": "Software Subscription",
       "type": "Expenditure",
       "provider": "ABSA",
-      "amount": -1499.0,
-      "balance": 36605.75
+      "amount": -1499.00,
+      "balance": 93463.00
+    },
+    {
+      "date": "2026-09-11",
+      "description": "Yoco Card Settlement",
+      "type": "Deposit",
+      "provider": "Yoco",
+      "amount": 5100.00,
+      "balance": 98563.00
+    },
+    {
+      "date": "2026-09-11",
+      "description": "Office Supplies",
+      "type": "Expenditure",
+      "provider": "ABSA",
+      "amount": -1245.50,
+      "balance": 97317.50
+    },
+    {
+      "date": "2026-09-12",
+      "description": "Yoco Card Settlement",
+      "type": "Deposit",
+      "provider": "Yoco",
+      "amount": 4890.00,
+      "balance": 102207.50
+    },
+    {
+      "date": "2026-09-12",
+      "description": "Equipment Purchase",
+      "type": "Expenditure",
+      "provider": "ABSA",
+      "amount": -4200.00,
+      "balance": 98007.50
+    },
+    {
+      "date": "2026-09-13",
+      "description": "Yoco Card Settlement",
+      "type": "Deposit",
+      "provider": "Yoco",
+      "amount": 5340.00,
+      "balance": 103347.50
+    },
+    {
+      "date": "2026-09-13",
+      "description": "Business Insurance",
+      "type": "Expenditure",
+      "provider": "ABSA",
+      "amount": -950.00,
+      "balance": 102397.50
+    },
+    {
+      "date": "2026-09-14",
+      "description": "Yoco Card Settlement",
+      "type": "Deposit",
+      "provider": "Yoco",
+      "amount": 5900.00,
+      "balance": 108297.50
+    },
+    {
+      "date": "2026-09-14",
+      "description": "Utilities",
+      "type": "Expenditure",
+      "provider": "ABSA",
+      "amount": -1180.75,
+      "balance": 107116.75
+    },
+    {
+      "date": "2026-09-15",
+      "description": "Yoco Card Settlement",
+      "type": "Deposit",
+      "provider": "Yoco",
+      "amount": 4685.00,
+      "balance": 111801.75
+    },
+    {
+      "date": "2026-09-15",
+      "description": "Stock",
+      "type": "Expenditure",
+      "provider": "ABSA",
+      "amount": -2580.00,
+      "balance": 109221.75
+    },
+    {
+      "date": "2026-09-16",
+      "description": "Yoco Card Settlement",
+      "type": "Deposit",
+      "provider": "Yoco",
+      "amount": 5600.00,
+      "balance": 114821.75
+    },
+    {
+      "date": "2026-09-16",
+      "description": "Transport",
+      "type": "Expenditure",
+      "provider": "ABSA",
+      "amount": -1340.00,
+      "balance": 113481.75
     }
   ]
 }

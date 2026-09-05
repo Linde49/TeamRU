@@ -1,41 +1,32 @@
 import json
-import os
 
 class Transaction:
-    def __init__(self, json_file_path: str = "business_bank_transactions.json"):
-        self.__file_path = json_file_path
-        self.__data = self.__load_json()
+    def __init__(self, date, description, amount, category):
+        self.date = date
+        self.description = description
+        self.amount = amount
+        self.category = category
 
-    def __load_json(self) -> dict:
-        if os.path.exists(self.__file_path):
-            with open(self.__file_path, "r") as file:
-                return json.load(file)
-        return {"business": "", "currency": "ZAR", "transactions": []}
+    @classmethod
+    def from_json(cls, data):
+         # If 'type' is in the data, rename it to 'category'
+        if 'type' in data and 'category' not in data:
+            data['category'] = data.pop('type')
+        
+        # If there are any OTHER unexpected keys, ignore them
+        valid_keys = {'date', 'description', 'amount', 'category'}
+        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
+        
+        return cls(**filtered_data)
 
-    def get_business_name(self) -> str:
-        return self.__data.get("business", "")
-
-    def get_currency(self) -> str:
-        return self.__data.get("currency", "ZAR")
-
-    # Native query for Yoco deposits
-    def query_yoco_deposits(self) -> list[float]:
-        return [
-            t["amount"] for t in self.__data.get("transactions", [])
-            if t.get("provider") == "Yoco" and t.get("type") == "Deposit"
-        ]
-
-    # Native query for expenditures
-    def query_expenditures(self) -> list[float]:
-        return [
-            t["amount"] for t in self.__data.get("transactions", [])
-            if t.get("type") == "Expenditure"
-        ]
-
-    # Native query for latest balance
-    def query_latest_balance(self) -> float:
-        txns = self.__data.get("transactions", [])
-        return txns[-1]["balance"] if txns else 0.0
-
-    def query_all_transactions(self) -> list[dict]:
-        return self.__data.get("transactions", [])
+    def process_transaction_type(self):
+        if "yoco" in self.description.lower() or "settlement" in self.description.lower():
+            self.amount = abs(self.amount)  # Treat as deposit
+            self.category = "Deposit"
+            return "Deposit"
+        elif self.amount > 0:
+            self.category = "Deposit"
+            return "Deposit"
+        else:
+            self.category = "Expenditure"
+            return "Expenditure"

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nexus — Business Finance</title>
+<style>
+:root {
+  --bg: #DAF1DE;
+  --surface: #FFFFFF;
+  --surface-2: #8EB69B;
+  --text: #051F20;
+  --muted: #163832;
+  --border: #8EB69B;
+  --primary: #235347;
+  --primary-dark: #0B2B26;
+  --success: #12915a;
+  --warning: #8EB69B;
+  --danger: #d64545;
+  --shadow: 0 10px 30px rgba(5, 31, 32, .07);
+  --radius: 18px;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+button, input, select { font: inherit; }
+button { cursor: pointer; border: 0; }
+.app { display: flex; min-height: 100vh; }
+.sidebar {
+  width: 250px;
+  background: #0B2B26; 
+  color: #fff;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 10;
+}
+.brand { display: flex; align-items: center; gap: 11px; padding: 0 10px 28px; font-weight: 800; font-size: 21px; }
+.brand-mark { width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; background: var(--primary); font-size: 18px; }
+.nav { display: grid; gap: 6px; }
+.nav button {
+  width: 100%; text-align: left; padding: 12px 14px; border-radius: 11px; background: transparent; color: #8EB69B; transition: .18s;
+}
+.nav button:hover, .nav button.active { background: #163832; color: #DAF1DE; }
+.nav-icon { display: inline-block; width: 24px; }
+.sidebar-bottom { margin-top: auto; padding: 12px 10px 0; }
+.business-mini { border-top: 1px solid #163832; padding-top: 17px; }
+.business-mini strong { display:block; }
+.business-mini small { color: #8EB69B; }
+.main { margin-left: 250px; width: calc(100% - 250px); padding: 26px 30px 40px; }
+.topbar { display:flex; align-items:center; justify-content:space-between; margin-bottom: 25px; }
+.title h1 { margin:0; font-size: 28px; letter-spacing: -.4px; }
+.title p { margin: 6px 0 0; color: var(--muted); }
+.top-actions { display:flex; align-items:center; gap: 10px; }
+.icon-btn { width:42px; height:42px; background:var(--surface); border:1px solid var(--border); border-radius:12px; }
+.avatar { width:42px; height:42px; border-radius:50%; display:grid; place-items:center; background:#8EB69B; color:#051F20; font-weight:800; }
+.view { display:none; }
+.view.active { display:block; }
+.grid { display:grid; gap:18px; }
+.stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow: var(--shadow); }
+.stat { padding: 20px; }
+.stat-label { color:var(--muted); font-size:13px; }
+.stat-value { font-size:28px; font-weight:800; margin:7px 0; }
+.trend { font-size:12px; font-weight:700; }
+.up { color:var(--success); }
+.down { color:var(--danger); }
+.content-grid { grid-template-columns: 1.5fr 1fr; margin-top:18px; }
+.card-head { display:flex; justify-content:space-between; align-items:center; padding:20px 20px 10px; }
+.card-head h3 { margin:0; font-size:16px; }
+.card-head button { color:var(--primary); background:transparent; font-weight:700; font-size:13px; }
+.chart { padding: 8px 18px 20px; height: 250px; }
+.bars { height: 100%; display:flex; align-items:flex-end; gap:14px; padding: 15px 4px 4px; border-bottom:1px solid var(--border); }
+.bar-wrap { flex:1; height:100%; display:flex; flex-direction:column; justify-content:flex-end; align-items:center; gap:8px; }
+.bar { width: 65%; max-width:34px; border-radius: 8px 8px 3px 3px; background: linear-gradient(180deg, #8EB69B, #235347); min-height:8px; }
+.bar-label { font-size:11px; color:var(--muted); }
+.readiness { padding: 20px; }
+.score-row { display:flex; align-items:center; gap:20px; }
+.ring { width:112px; height:112px; border-radius:50%; background: conic-gradient(var(--primary) 0 78%, #DAF1DE 78% 100%); display:grid; place-items:center; position:relative; flex:0 0 auto; }
+.ring::after { content:""; position:absolute; width:84px; height:84px; background:#fff; border-radius:50%; }
+.ring span { position:relative; z-index:1; font-size:25px; font-weight:800; }
+.readiness h4 { margin: 0 0 6px; font-size:18px; }
+.readiness p { margin: 0; color: var(--muted); line-height:1.55; font-size:13px; }
+.progress { background:#DAF1DE; height:8px; border-radius:99px; overflow:hidden; margin-top:15px; }
+.progress > div { height:100%; width:78%; background:var(--primary); border-radius:inherit; }
+.checks { margin-top:18px; display:grid; gap:10px; }
+.check { display:flex; align-items:center; gap:10px; font-size:13px; }
+.check .dot { width:22px; height:22px; border-radius:50%; display:grid; place-items:center; background:#DAF1DE; color:var(--success); font-weight:800; }
+.quick { grid-template-columns:repeat(3,1fr); margin-top:18px; }
+.action { padding:18px; display:flex; align-items:center; gap:14px; cursor:pointer; }
+.action-icon { width:44px; height:44px; border-radius:12px; display:grid; place-items:center; background:#8EB69B; color:#051F20; font-size:19px; }
+.action strong { display:block; font-size:14px; }
+.action span { color:var(--muted); font-size:12px; }
+.section-card { margin-top:18px; padding-bottom:8px; }
+.table-wrap { overflow:auto; }
+table { width:100%; border-collapse:collapse; min-width:680px; }
+th, td { text-align:left; padding:14px 20px; border-top:1px solid var(--border); font-size:13px; }
+th { color:var(--muted); font-weight:600; background:#DAF1DE; }
+.amount { font-weight:800; }
+.badge { display:inline-flex; padding:5px 9px; border-radius:999px; font-size:11px; font-weight:700; }
+.badge.income { background:#ffffff; color:var(--success); border:1px solid var(--success); }
+.badge.expense { background:#ffffff; color:var(--danger); border:1px solid var(--danger); }
+.form { padding:20px; display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+.field { display:grid; gap:7px; }
+.field.full { grid-column:1/-1; }
+.field label { font-size:12px; color:var(--muted); font-weight:700; }
+.field input, .field select { width:100%; padding:12px 13px; border:1px solid var(--border); border-radius:11px; outline:none; background:#fff; }
+.field input:focus, .field select:focus { border-color:#8EB69B; box-shadow:0 0 0 3px #DAF1DE; }
+.primary { background:var(--primary); color:#fff; padding:12px 17px; border-radius:11px; font-weight:800; }
+.primary:hover { background:var(--primary-dark); }
+.form-actions { grid-column:1/-1; display:flex; justify-content:flex-end; gap:10px; }
+.secondary { background:#eef2f7; color:#374151; padding:12px 17px; border-radius:11px; font-weight:800; }
+.loan-box { padding:20px; }
+.loan-amount { font-size:39px; font-weight:900; margin:10px 0 3px; }
+.loan-note { color:var(--muted); font-size:13px; }
+.loan-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:18px; }
+.loan-metric { padding:15px; background:#DAF1DE; border-radius:13px; }
+.loan-metric span { display:block; color:var(--muted); font-size:11px; }
+.loan-metric strong { display:block; margin-top:5px; font-size:17px; }
+.empty { padding:50px 20px; text-align:center; color:var(--muted); }
+.toast { position:fixed; right:25px; bottom:25px; background:#0B2B26; color:#DAF1DE; padding:13px 16px; border-radius:11px; box-shadow:var(--shadow); display:none; z-index:99; }
+.mobile-menu { display:none; }
+@media (max-width: 1050px) {
+  .stats { grid-template-columns:repeat(2,1fr); }
+  .content-grid { grid-template-columns:1fr; }
+}
+@media (max-width: 760px) {
+  .sidebar { transform:translateX(-100%); transition:.2s; }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; width:100%; padding:20px 15px 30px; }
+  .mobile-menu { display:block; margin-right:10px; }
+  .topbar { align-items:flex-start; }
+  .top-actions .icon-btn:first-of-type { display:none; }
+  .title { display:flex; align-items:flex-start; }
+  .title h1 { font-size:23px; }
+  .stats, .quick, .loan-grid, .form { grid-template-columns:1fr; }
+  .form .full { grid-column:auto; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><div class="brand-mark">N</div> Nexus</div>
+    <nav class="nav">
+      <button class="active" data-view="dashboard"><span class="nav-icon">⌂</span> Dashboard</button>
+      <button data-view="transactions"><span class="nav-icon">↔</span> Transactions</button>
+      <button data-view="business"><span class="nav-icon">▣</span> Business data</button>
+      <button data-view="loan"><span class="nav-icon">▤</span> Loan readiness</button>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="business-mini">
+        <strong id="sidebarBusinessName">Karabo's Spaza</strong>
+        <small>Business account</small>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="title">
+        <button class="icon-btn mobile-menu" id="menuBtn" aria-label="Open menu">☰</button>
+        <div>
+          <h1 id="pageTitle">Good morning, Karabo 👋</h1>
+          <p id="pageSubtitle">Here is how your business is doing today.</p>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button class="icon-btn" onclick="showToast('Notifications are up to date.')" aria-label="Notifications">🔔</button>
+        <div class="avatar">K</div>
+      </div>
+    </header>
+
+    <section class="view active" id="dashboard">
+      <div class="grid stats" id="statsContainer">
+        <!-- populated by JS -->
+      </div>
+
+      <div class="grid content-grid">
+        <div class="card">
+          <div class="card-head"><h3>Income vs expenses</h3><button onclick="showToast('Chart range set to 6 months.')">Last 6 months ▾</button></div>
+          <div class="chart"><div class="bars" id="chartBars"></div></div>
+        </div>
+        <div class="card readiness" id="loanReadinessCard">
+          <!-- populated by JS -->
+        </div>
+      </div>
+
+      <div class="grid quick">
+        <div class="card action" data-view-link="transactions"><div class="action-icon">＋</div><div><strong>Add transaction</strong><span>Record income or expense</span></div></div>
+        <div class="card action" data-view-link="business"><div class="action-icon">▥</div><div><strong>Update business data</strong><span>Keep your profile complete</span></div></div>
+        <div class="card action" data-view-link="loan"><div class="action-icon">✓</div><div><strong>Check loan readiness</strong><span>See what a lender can verify</span></div></div>
+      </div>
+
+      <div class="card section-card">
+        <div class="card-head"><h3>Recent transactions</h3><button data-view-link="transactions">View all</button></div>
+        <div class="table-wrap"><table><thead><tr><th>Date</th><th>Description</th><th>Category</th><th>Type</th><th>Amount</th></tr></thead><tbody id="recentBody"></tbody></table></div>
+      </div>
+    </section>
+
+    <section class="view" id="transactions">
+      <div class="card">
+        <div class="card-head"><h3>Transactions</h3><button onclick="showToast('All transactions are stored locally in this demo.')">Export data</button></div>
+        <form class="form" id="transactionForm">
+          <div class="field"><label for="date">Date</label><input id="date" type="date" required /></div>
+          <div class="field"><label for="type">Type</label><select id="type"><option value="income">Income</option><option value="expense">Expense</option></select></div>
+          <div class="field"><label for="description">Description</label><input id="description" type="text" placeholder="e.g. Stock purchase" required /></div>
+          <div class="field"><label for="category">Category</label><select id="category"><option>Sales</option><option>Stock</option><option>Transport</option><option>Utilities</option><option>Rent</option><option>Other</option></select></div>
+          <div class="field"><label for="amount">Amount (R)</label><input id="amount" type="number" min="0.01" step="0.01" placeholder="0.00" required /></div>
+          <div class="form-actions"><button type="reset" class="secondary">Clear</button><button type="submit" class="primary">Save transaction</button></div>
+        </form>
+      </div>
+      <div class="card section-card">
+        <div class="card-head"><h3>Transaction history</h3></div>
+        <div class="table-wrap"><table><thead><tr><th>Date</th><th>Description</th><th>Category</th><th>Type</th><th>Amount</th></tr></thead><tbody id="allBody"></tbody></table></div>
+      </div>
+    </section>
+
+    <section class="view" id="business">
+      <div class="card">
+        <div class="card-head"><h3>Business information</h3></div>
+        <form class="form" id="businessForm">
+          <div class="field"><label for="bizName">Business name</label><input id="bizName" required /></div>
+          <div class="field"><label for="owner">Owner</label><input id="owner" required /></div>
+          <div class="field"><label for="industry">Industry</label><select id="industry"><option>Retail / Spaza shop</option><option>Food & beverage</option><option>Services</option><option>Agriculture</option><option>Other</option></select></div>
+          <div class="field"><label for="years">Years trading</label><input id="years" type="number" min="0" /></div>
+          <div class="field"><label for="employees">Employees</label><input id="employees" type="number" min="0" /></div>
+          <div class="field"><label for="monthly">Typical monthly revenue (R)</label><input id="monthly" type="number" min="0" /></div>
+          <div class="field full"><label for="notes">Business notes</label><input id="notes" /></div>
+          <div class="form-actions"><button type="submit" class="primary">Save business profile</button></div>
+        </form>
+      </div>
+    </section>
+
+    <section class="view" id="loan">
+      <div class="card loan-box" id="loanDetailBox">
+        <!-- populated by JS -->
+      </div>
+      <div class="card section-card">
+        <div class="card-head"><h3>What the lender can verify</h3></div>
+        <div class="checks" id="loanChecks" style="padding:0 20px 20px">
+          <!-- populated by JS -->
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+// Helper functions
+function money(n) {
+  return 'R' + Number(n).toLocaleString('en-ZA', {minimumFractionDigits:2, maximumFractionDigits:2});
+}
+function escapeHTML(value) {
+  return String(value).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+}
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.style.display = 'block';
+  clearTimeout(window.__toastTimer);
+  window.__toastTimer = setTimeout(() => toast.style.display = 'none', 2400);
+}
+
+// Navigation
+const pageMeta = {
+  dashboard: ['Good morning, Karabo 👋', 'Here is how your business is doing today.'],
+  transactions: ['Transactions', 'Keep every business transaction in one place.'],
+  business: ['Business data', 'Maintain the information lenders need to understand your business.'],
+  loan: ['Loan readiness', 'See how your financial records translate into lender-ready information.']
+};
+
+function navigate(viewId) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(viewId).classList.add('active');
+  const nav = document.querySelector(`.nav button[data-view="${viewId}"]`);
+  if (nav) nav.classList.add('active');
+  const [title, subtitle] = pageMeta[viewId] || ['', ''];
+  document.getElementById('pageTitle').textContent = title;
+  document.getElementById('pageSubtitle').textContent = subtitle;
+  document.getElementById('sidebar').classList.remove('open');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+document.querySelectorAll('.nav button').forEach(button => button.addEventListener('click', () => navigate(button.dataset.view)));
+document.querySelectorAll('[data-view-link]').forEach(button => button.addEventListener('click', () => navigate(button.dataset.viewLink)));
+document.getElementById('menuBtn').addEventListener('click', () => document.getElementById('sidebar').classList.toggle('open'));
+
+// ----- Dashboard data fetch and render -----
+function renderDashboard(data) {
+  // Stats
+  const stats = data.stats;
+  const statsHTML = `
+    <div class="card stat"><div class="stat-label">Revenue this month</div><div class="stat-value">${money(stats.revenue)}</div><div class="trend up">↑ 12.4% vs last month</div></div>
+    <div class="card stat"><div class="stat-label">Expenses this month</div><div class="stat-value">${money(stats.expenses)}</div><div class="trend down">↑ 4.8% vs last month</div></div>
+    <div class="card stat"><div class="stat-label">Net profit</div><div class="stat-value">${money(stats.profit)}</div><div class="trend up">↑ 28.1% vs last month</div></div>
+    <div class="card stat"><div class="stat-label">Cash available</div><div class="stat-value">${money(stats.cash)}</div><div class="trend up">Healthy cash position</div></div>
+  `;
+  document.getElementById('statsContainer').innerHTML = statsHTML;
+
+  // Chart
+  const chartData = data.chart;
+  if (chartData && chartData.length > 0) {
+    const maxVal = Math.max(...chartData.map(d => Math.max(d.income, d.expense)), 1);
+    const barsHTML = chartData.map(d => `
+      <div class="bar-wrap" title="${d.month}: Income ${money(d.income)}, Expenses ${money(d.expense)}">
+        <div class="bar" style="height:${(d.income / maxVal * 90)}%"></div>
+        <span class="bar-label">${d.month.slice(5)}</span>
+      </div>
+    `).join('');
+    document.getElementById('chartBars').innerHTML = barsHTML;
+  } else {
+    document.getElementById('chartBars').innerHTML = '<div class="empty">No chart data available</div>';
+  }
+
+  // Recent transactions
+  const recent = data.recent || [];
+  const recentHTML = recent.map(t => `
+    <tr>
+      <td>${escapeHTML(t.date)}</td>
+      <td>${escapeHTML(t.description)}</td>
+      <td>${escapeHTML(t.category)}</td>
+      <td><span class="badge ${t.type}">${t.type === 'income' ? 'Income' : 'Expense'}</span></td>
+      <td class="amount">${t.type === 'income' ? '+' : '-'}${money(t.amount)}</td>
+    </tr>
+  `).join('');
+  document.getElementById('recentBody').innerHTML = recentHTML;
+
+  // Loan readiness card on dashboard
+  const loan = data.loan;
+  const score = loan.score || 0;
+  const checks = loan.checks || [];
+  const ringColor = score >= 70 ? '#235347' : (score >= 40 ? '#8EB69B' : '#d64545');
+  const progressWidth = Math.min(score, 100);
+  const checksHTML = checks.map(c => {
+    const isOk = c.includes('✓') || c.includes('tracked') || c.includes('profitable') || c.includes('categorised');
+    const icon = isOk ? '✓' : '✗';
+    const color = isOk ? '#e5f7ef' : '#fce4e4';
+    const textColor = isOk ? 'var(--success)' : 'var(--danger)';
+    return `<div class="check"><span class="dot" style="background:${color};color:${textColor}">${icon}</span> ${c}</div>`;
+  }).join('');
+  document.getElementById('loanReadinessCard').innerHTML = `
+    <div class="card-head" style="padding:0 0 15px"><h3>Loan readiness</h3><button data-view-link="loan">View details</button></div>
+    <div class="score-row">
+      <div class="ring" style="background: conic-gradient(${ringColor} 0 ${score}%, #DAF1DE ${score}% 100%);"><span>${score}%</span></div>
+      <div><h4>${score >= 70 ? 'Good standing' : (score >= 40 ? 'Needs improvement' : 'Insufficient data')}</h4>
+      <p>${score >= 70 ? 'Your records show a consistent trading history and positive profitability.' : 'Review your financial records to improve loan readiness.'}</p></div>
+    </div>
+    <div class="progress"><div style="width:${progressWidth}%"></div></div>
+    <div class="checks">${checksHTML}</div>
+  `;
+}
+
+// ----- Transaction list (all) -----
+function renderAllTransactions(txns) {
+  const rows = txns.map(t => `
+    <tr>
+      <td>${escapeHTML(t.date)}</td>
+      <td>${escapeHTML(t.description)}</td>
+      <td>${escapeHTML(t.category || 'Other')}</td>
+      <td><span class="badge ${t.type === 'income' ? 'income' : 'expense'}">${t.type === 'income' ? 'Income' : 'Expense'}</span></td>
+      <td class="amount">${t.type === 'income' ? '+' : '-'}${money(Math.abs(t.amount))}</td>
+    </tr>
+  `).join('');
+  document.getElementById('allBody').innerHTML = rows || '<tr><td colspan="5" class="empty">No transactions yet</td></tr>';
+}
+
+// ----- Business form load -----
+function loadBusinessProfile() {
+  fetch('/api/business')
+    .then(r => r.json())
+    .then(data => {
+      document.getElementById('bizName').value = data.business || '';
+      document.getElementById('owner').value = data.owner || '';
+      document.getElementById('industry').value = data.industry || 'Retail / Spaza shop';
+      document.getElementById('years').value = data.yearsTrading || 0;
+      document.getElementById('employees').value = data.employees || 0;
+      document.getElementById('monthly').value = data.typicalMonthlyRevenue || 0;
+      document.getElementById('notes').value = data.notes || '';
+      document.getElementById('sidebarBusinessName').textContent = data.business || 'Your Business';
+    })
+    .catch(err => showToast('Error loading business profile'));
+}
+
+// ----- Loan detail view -----
+function loadLoanDetail() {
+  fetch('/api/loan')
+    .then(r => r.json())
+    .then(data => {
+      const cfv = data.cfv || 0;
+      const sde = data.sde_weighted || 0;
+      const comp = data.compounding_factor || 1;
+      const mult = data.multiplier || 1.5;
+      const offers = data.offers || [];
+      const score = data.score || 0;
+      const checks = data.checks || [];
+
+      // Main loan box
+      const offerAmount = offers.length > 0 && offers[0].amount > 0 ? offers[0].amount : 0;
+      document.getElementById('loanDetailBox').innerHTML = `
+        <div class="card-head" style="padding:0"><h3>Loan readiness</h3><span class="badge income">${offers.length > 0 ? 'OFFER RECEIVED' : 'READY TO REVIEW'}</span></div>
+        <div class="loan-amount">${money(cfv)}</div>
+        <div class="loan-note">Estimated finance amount your current records could support. Final approval depends on the lender.</div>
+        <div class="progress"><div style="width:${Math.min(score, 100)}%"></div></div>
+        <div class="loan-grid">
+          <div class="loan-metric"><span>Weighted SDE</span><strong>${money(sde)}</strong></div>
+          <div class="loan-metric"><span>Compounding factor</span><strong>${comp.toFixed(4)}</strong></div>
+          <div class="loan-metric"><span>Risk multiplier</span><strong>${mult.toFixed(2)}x</strong></div>
+        </div>
+        ${offers.length > 0 ? `
+          <div style="margin-top:20px;padding:15px;background:#DAF1DE;border-radius:12px;">
+            <h4 style="margin:0 0 8px">Latest Bank Offer</h4>
+            <p><strong>${offers[0].bank}</strong> — ${offers[0].decision === 'OFFERED' ? '✅ Offered' : '❌ Declined'}</p>
+            ${offers[0].amount > 0 ? `<p>Amount: ${money(offers[0].amount)} at ${(offers[0].rate*100).toFixed(0)}% p.a.</p>` : ''}
+          </div>
+        ` : ''}
+      `;
+
+      // Checks
+      const checksHTML = checks.map(c => {
+        const isOk = c.includes('✓') || c.includes('tracked') || c.includes('profitable') || c.includes('categorised');
+        const icon = isOk ? '✓' : '✗';
+        const color = isOk ? '#e5f7ef' : '#fce4e4';
+        const textColor = isOk ? 'var(--success)' : 'var(--danger)';
+        return `<div class="check"><span class="dot" style="background:${color};color:${textColor}">${icon}</span> ${c}</div>`;
+      }).join('');
+      document.getElementById('loanChecks').innerHTML = checksHTML;
+    })
+    .catch(err => showToast('Error loading loan data'));
+}
+
+// ----- Initial data loading -----
+function loadDashboard() {
+  fetch('/api/dashboard')
+    .then(r => r.json())
+    .then(data => {
+      renderDashboard(data);
+      // Also load all transactions for transactions view
+      fetch('/api/transactions')
+        .then(r => r.json())
+        .then(txns => renderAllTransactions(txns))
+        .catch(err => showToast('Error loading transactions'));
+    })
+    .catch(err => showToast('Error loading dashboard data'));
+}
+
+// ----- Form handlers -----
+document.getElementById('transactionForm').addEventListener('submit', event => {
+  event.preventDefault();
+  const date = document.getElementById('date').value;
+  const type = document.getElementById('type').value; // income/expense
+  const description = document.getElementById('description').value.trim();
+  const category = document.getElementById('category').value;
+  const amount = parseFloat(document.getElementById('amount').value);
+  if (!date || !description || !amount || amount <= 0) {
+    showToast('Please complete all fields with a valid amount.');
+    return;
+  }
+  const payload = { date, type, description, category, amount };
+  fetch('/api/transaction', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(r => r.json())
+  .then(res => {
+    if (res.error) {
+      showToast('Error: ' + res.error);
+    } else {
+      showToast('Transaction saved successfully.');
+      // Refresh data
+      loadDashboard();
+      document.getElementById('transactionForm').reset();
+      document.getElementById('date').valueAsDate = new Date();
+    }
+  })
+  .catch(err => showToast('Error saving transaction'));
+});
+
+document.getElementById('businessForm').addEventListener('submit', event => {
+  event.preventDefault();
+  const bizName = document.getElementById('bizName').value.trim();
+  if (!bizName) { showToast('Please enter a business name.'); return; }
+  const payload = {
+    business: bizName,
+    owner: document.getElementById('owner').value.trim(),
+    industry: document.getElementById('industry').value,
+    yearsTrading: parseFloat(document.getElementById('years').value) || 0,
+    employees: parseFloat(document.getElementById('employees').value) || 0,
+    typicalMonthlyRevenue: parseFloat(document.getElementById('monthly').value) || 0,
+    notes: document.getElementById('notes').value.trim()
+  };
+  fetch('/api/business', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(r => r.json())
+  .then(res => {
+    if (res.error) {
+      showToast('Error: ' + res.error);
+    } else {
+      showToast('Business profile saved successfully.');
+      document.getElementById('sidebarBusinessName').textContent = bizName;
+    }
+  })
+  .catch(err => showToast('Error saving business profile'));
+});
+
+// Set default date
+document.getElementById('date').valueAsDate = new Date();
+
+// Initialize
+loadDashboard();
+loadBusinessProfile();
+// Load loan detail when loan view is opened (could load on demand)
+document.querySelector('[data-view="loan"]').addEventListener('click', loadLoanDetail);
+// Also load loan detail if already on loan view (e.g., direct link)
+if (document.querySelector('[data-view="loan"].active')) {
+  loadLoanDetail();
+}
+</script>
+</body>
+</html>
