@@ -1,7 +1,7 @@
 # TeamRU
 # Nexus - Business Finance Dashboard
 
-FinTrack is a lightweight Flask-based web application designed for SMMEs (like Spaza shops) to visualize their financial health, automatically process Yoco card settlements as deposits, calculate future business valuations, and assess loan readiness. The UI features a modern, deep-green professional theme.
+Nexus is a lightweight Flask-based web application designed for SMMEs (like Spaza shops) to visualize their financial health, automatically process Yoco card settlements as deposits, calculate future business valuations, and assess loan readiness. The UI features a modern, deep-green professional theme.
 
 ## Features
 
