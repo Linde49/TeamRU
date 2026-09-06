@@ -40,14 +40,15 @@ Nexus is a lightweight Flask-based web application designed for SMMEs (like Spaz
 ## Setup and Installation
 
 1. **Clone or download** the project files into a folder.
-2. **Navigate to the folder** in your terminal/command prompt:
-   ```bash
-   cd path/to/your-project-folder
-3. install flask: pip install flask
+2. **Create a virtual environment** Open cmd, navigate to folder, and run: python -m venv venv or py -m venv venv
+3. **Once the virtual environment is created** run: venv\Scripts\activate
+4. **Then install Flask** pip install Flask
+   
 
 **Running the application**:
-1. Start flask development server: python/ py app.py
-2. Open web browswer and go to : http://127.0.0.1:5000
+1. Open Vscode and open all files
+2. Run app.py
+3. Open web browswer and go to: http://127.0.0.1:5000
 
 
 **Data Format (business_bank_transactions.json)**
